@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:movie_list_app/ui/screens/movie_detail.dart';
 import 'dart:async';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
@@ -59,6 +60,19 @@ class MovieListState extends State<MovieList> {
     });
   }
 
+  viewMovie(movie) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) {
+        return MovieDetail(movie);
+        }
+      )
+    );
+}
+
+
+
   //TODO: Add onPressed function for flat button
   @override
   Widget build(BuildContext context) {
@@ -101,7 +115,8 @@ class MovieListState extends State<MovieList> {
                   return FlatButton(
                     child: MovieCell(movies, i),
                     padding: const EdgeInsets.all(0.0),
-                    color: Colors.white
+                    color: Colors.white,
+                    onPressed: () => viewMovie(movies[i])
                   );
                 },
               )
@@ -165,7 +180,7 @@ class MovieCell extends StatelessWidget {
               padding: const EdgeInsets.all(0.0),
               child: Container(
                 margin: const EdgeInsets.all(16.0),
-                child: Container( 
+                child: Container(
                   width: 70.0,
                   height: 70.0
                 ),
